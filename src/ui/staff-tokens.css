@@ -1,0 +1,232 @@
+/*
+ * Design tokens for the staff app ("quiet, dense, record-first").
+ * Colors are Radix Colors steps (slate neutral, indigo accent); every component reads the semantic names below,
+ * never a step, so the dark theme only redefines variables (the `[data-theme="dark"]` block below, Radix's dark steps).
+ * The theme is on <html data-theme>: set to light or dark by the host application.
+ * Import after `tailwindcss`: `@import "./ui/staff-tokens.css";`
+ */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  /* slate */
+  --slate-1: #fcfcfd;
+  --slate-2: #f9f9fb;
+  --slate-3: #f0f0f3;
+  --slate-4: #e8e8ec;
+  --slate-5: #e0e1e6;
+  --slate-6: #d9d9e0;
+  --slate-7: #cdced6;
+  --slate-8: #b9bbc6;
+  --slate-9: #8b8d98;
+  --slate-10: #80838d;
+  --slate-11: #60646c;
+  --slate-12: #1c2024;
+  /* indigo */
+  --indigo-2: #f8faff;
+  --indigo-3: #edf2fe;
+  --indigo-4: #e1e9ff;
+  --indigo-8: #8da4ef;
+  --indigo-9: #3e63dd;
+  --indigo-10: #3358d4;
+  --indigo-11: #3a5bc7;
+
+  --bg: var(--slate-1);
+  --surface: #ffffff;
+  --subtle: var(--slate-2);
+  --sidebar-fg: #3b3f46;
+  --overlay: rgb(28 32 36 / 0.32);
+  --shadow-popover: 0 0 0 1px rgb(28 32 36 / 0.06), 0 4px 16px -4px rgb(28 32 36 / 0.16);
+  --shadow-dialog: 0 0 0 1px rgb(28 32 36 / 0.06), 0 16px 48px -12px rgb(28 32 36 / 0.3);
+  --shadow-control: 0 1px 2px rgb(28 32 36 / 0.05);
+
+  /* Status tones: tint, text that passes 4.5:1 on it, and a dot. */
+  --success-bg: #e6f6eb;
+  --success-fg: #1a6b47;
+  --success-dot: #30a46c;
+  --warning-bg: #fff7c2;
+  --warning-fg: #8f4d00;
+  --warning-dot: #ffc53d;
+  --danger-bg: #feebec;
+  --danger-fg: #b4232a;
+  --danger-dot: #e5484d;
+  --danger-solid: #ce2c31; /* white text reaches 4.5:1 */
+  --danger-solid-hover: #b42228;
+  --info-bg: #e6f4fe;
+  --info-fg: #0b5fa8;
+  --info-dot: #0090ff;
+
+  color-scheme: light;
+}
+
+/*
+ * Dark: the page is the darkest step, records (cards, popovers, dialogs) sit one step up, and table headers and
+ * sidebars sit between the two, the way they sit just below white in light. Shadows can't lift anything on a dark
+ * page, so the hairline ring carries the edge. --indigo-10 keeps its light value: white on the dark step 10 is under 4.5:1.
+ */
+[data-theme="dark"] {
+  --slate-1: #111113;
+  --slate-2: #18191b;
+  --slate-3: #212225;
+  --slate-4: #272a2d;
+  --slate-5: #2e3135;
+  --slate-6: #363a3f;
+  --slate-7: #43484e;
+  --slate-8: #5a6169;
+  --slate-9: #696e77;
+  --slate-10: #777b84;
+  --slate-11: #b0b4ba;
+  --slate-12: #edeef0;
+  --indigo-2: #141726;
+  --indigo-3: #182449;
+  --indigo-4: #1d2e62;
+  --indigo-8: #435db1;
+  --indigo-9: #3e63dd;
+  --indigo-11: #9eb1ff;
+
+  --bg: var(--slate-1);
+  --surface: var(--slate-2);
+  --subtle: #141517;
+  --sidebar-fg: var(--slate-11);
+  --overlay: rgb(0 0 0 / 0.6);
+  --shadow-popover: 0 0 0 1px rgb(255 255 255 / 0.08), 0 4px 16px -4px rgb(0 0 0 / 0.5);
+  --shadow-dialog: 0 0 0 1px rgb(255 255 255 / 0.08), 0 16px 48px -12px rgb(0 0 0 / 0.7);
+  --shadow-control: 0 1px 2px rgb(0 0 0 / 0.3);
+
+  --success-bg: #132d21;
+  --success-fg: #3dd68c;
+  --success-dot: #30a46c;
+  --warning-bg: #302008;
+  --warning-fg: #ffca16;
+  --warning-dot: #ffc53d;
+  --danger-bg: #3b1219;
+  --danger-fg: #ff9592;
+  --danger-dot: #e5484d;
+  --info-bg: #0d2847;
+  --info-fg: #70b8ff;
+  --info-dot: #0090ff;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-sidebar-fg: var(--sidebar-fg);
+  --color-hover: var(--slate-3);
+  --color-active: var(--slate-4);
+  --color-divider: var(--slate-4);
+  --color-border: var(--slate-5);
+  --color-control: var(--slate-6);
+  --color-strong: var(--slate-7);
+  --color-border-hover: var(--slate-8);
+  --color-faint: var(--slate-9);
+  --color-muted: var(--slate-11);
+  --color-fg: var(--slate-12);
+  --color-overlay: var(--overlay);
+
+  --color-accent: var(--indigo-9);
+  --color-accent-hover: var(--indigo-10);
+  /* Text on the accent: override --accent-on when using a light brand color. */
+  --color-accent-on: var(--accent-on, #ffffff);
+  --color-accent-fg: var(--indigo-11);
+  --color-accent-subtle: var(--indigo-3);
+  --color-accent-faint: var(--indigo-2);
+  --color-focus: var(--indigo-8);
+  --color-focus-ring: var(--indigo-4);
+
+  --color-success-bg: var(--success-bg);
+  --color-success-fg: var(--success-fg);
+  --color-success-dot: var(--success-dot);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-fg: var(--warning-fg);
+  --color-warning-dot: var(--warning-dot);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-dot: var(--danger-dot);
+  --color-danger: var(--danger-solid);
+  --color-danger-hover: var(--danger-solid-hover);
+  --color-info-bg: var(--info-bg);
+  --color-info-fg: var(--info-fg);
+  --color-info-dot: var(--info-dot);
+
+  /* Type scale: display 24/32, title 18/28, heading 14/20, body 13/20, label 12/16. */
+  --text-display: 24px;
+  --text-display--line-height: 32px;
+  --text-display--letter-spacing: -0.02em;
+  --text-title: 18px;
+  --text-title--line-height: 28px;
+  --text-title--letter-spacing: -0.01em;
+  --text-heading: 14px;
+  --text-heading--line-height: 20px;
+  --text-body: 13px;
+  --text-body--line-height: 20px;
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-micro: 11px;
+  --text-micro--line-height: 16px;
+
+  --radius-badge: 4px;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --radius-dialog: 12px;
+
+  --shadow-popover: var(--shadow-popover);
+  --shadow-dialog: var(--shadow-dialog);
+  --shadow-control: var(--shadow-control);
+
+  /* The scale in px: the root font is 13px, so a rem-based 0.25rem step would shrink every size to 3.25px. */
+  --spacing: 4px;
+  --container-xs: 320px;
+  --container-sm: 384px;
+  --container-md: 448px;
+  --container-lg: 512px;
+  --container-xl: 576px;
+  --container-2xl: 672px;
+  --container-3xl: 768px;
+  --container-4xl: 896px;
+  --container-5xl: 1024px;
+  /* Control heights: 24 in tables, 28 in toolbars, 32 in forms; rows 40. */
+  --spacing-row: 40px;
+  --spacing-sidebar: 232px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-fg);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+  }
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
+  }
+  ::selection {
+    background: var(--indigo-4);
+  }
+}
+
+/* Figures: aligned digits, and an amount never breaks across lines ("+ $ 36.000,00"). */
+@utility num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
